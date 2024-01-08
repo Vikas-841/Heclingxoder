@@ -7,25 +7,26 @@ from SmartEncoder.Database.db import myDB
 
 class video:
   crf = []
+  crf.append("33.5")
   codec = []
-  quality = []
+  codec.append("libx264")
+  qualityy = []
+  qualityy.append("846x480")
   
   
 #myDB.set('crf', "29.5")
-video.codec.append("libx265")
-video.quality.append("852x480")
+#video.codec.append("libx265")
+#video.quality.append("852x480")
 
 class audio:
-  a_bitrate = []
-  a_codec = []
-
-audio.a_bitrate.append("45k")
-audio.a_codec.append("libopus")
-
+  audio_codec = []
+  audio_codec.append("libopus")
+  audio_ = []
+  audio_.append("32k")
+ 
 class speed:
   preset = []
-
-speed.preset.append("fast")
+  preset.append("veryfast")
 
 class watermark:
   size_one = []
@@ -36,7 +37,7 @@ watermark.size_two.append('30')
 vanish = []
 vanish.insert(0, "true")
 #class queue:
-#  data = []
+#data = []
 #queue = []
 name = []
 name.append("480p")
@@ -44,6 +45,3 @@ name.append("480p")
 rename_queue = []
 rename_task = []
 rename_task.insert(0, "off")
-
-audio_ = []
-quality_ = []
