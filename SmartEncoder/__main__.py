@@ -11,7 +11,7 @@ logging.basicConfig(
     level=logging.DEBUG, 
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
-logger = logging.getLogger(name)
+logger = logging.getLogger(__name__)
 
 from pyrogram import Client
 from pyrogram.types import CallbackQuery
