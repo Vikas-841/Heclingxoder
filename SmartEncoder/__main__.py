@@ -1,24 +1,24 @@
 from . import TGBot
 import logging
-import asyncio
+import asyncio 
 import time
-import pickle
-import codecs
+import pickle 
+import codecs 
 import speedtest
 from pyrogram import filters
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.DEBUG, 
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(name)
 
 from pyrogram import Client
 from pyrogram.types import CallbackQuery
 from pyrogram.handlers import MessageHandler, CallbackQueryHandler
-
 from pyrogram.errors import FloodWait
 from datetime import datetime as dt
+
 import SmartEncoder.Plugins.Labour
 from SmartEncoder.Plugins.Queue import *
 from SmartEncoder.Plugins.list import *
@@ -33,22 +33,33 @@ from config import Config
 from pyrogram import filters, Client, idle
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from pathlib import Path
+
 mode_for_custom = []
 uptime = dt.now()
 mode_for_custom.append("off")
 
+# async def resume_task():
+#   if myDB.llen("DBQueue") > 0:
+#     queue_ = myDB.lindex("DBQueue", 0)
+#     _queue = pickle.loads(codecs.decode(queue_.encode(), "base64"))
+#     await add_task(TGBot, _queue)
+
 async def start_bot():
     await TGBot.start()
+    # await resume_task()
     await idle()
 
-if __name__ == "__main__":
+# if __name__ == "main":
+#     loop.run_untill_complete(start_bot())
+# rename_task.insert(0, "on")
+if __name__ == "main":
     @TGBot.on_message(filters.incoming & (filters.video | filters.document))
     async def wah_1_man(bot, message: Message):
         if mode_for_custom[0] == "off":
             if message.chat.id not in Config.AUTH_USERS:
                 return
             if rename_task[0] == "off":
-                query = await message.reply_text("Added this file in queue.\nCompression will start soon.", quote=True)
+                query = await message.reply_text("Aᴅᴅᴇᴅ ᴛʜɪs ғɪʟᴇ ɪɴ ǫᴜᴇᴜᴇ.\nCᴏᴍᴘʀᴇss ᴡɪʟʟ sᴛᴀʀᴛ sᴏᴏɴ.", quote=True)
                 a = message
                 data.append(a)
                 if len(data) == 1:
@@ -56,7 +67,7 @@ if __name__ == "__main__":
                     await add_task(bot, message)
             else:
                 if message.from_user.id not in Config.AUTH_USERS:
-                    return
+                    return 
                 query = await message.reply_text("Added this file to rename in queue.", quote=True)
                 rename_queue.append(message)
                 if len(rename_queue) == 1:
@@ -104,33 +115,38 @@ if __name__ == "__main__":
         )
         await boa.delete()
 
+    # bash
     @TGBot.on_message(filters.command("bash", prefixes=["/", "."]))
     async def start_cmd_handler(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
             return
         await bash_exec(bot, message)
 
+    # ls
     @TGBot.on_message(filters.incoming & filters.command("ls", prefixes=["/", "."]))
     async def lost_files(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
             return
         await l_s(bot, message)
 
+    # disable normal mode
     @TGBot.on_message(filters.command("manual_mode", prefixes=["/", "."]))
     async def hehe(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
-            return
-        await message.reply_text("I will now not respond to any file! Reply me with /dl and /ul", quote=True)
+            return 
+        await message.reply_text("I will now wont respond to any file! Reply me with /dl and /ul", quote=True)
         mode_for_custom.insert(0, "on")
 
+    # able normal mode
     @TGBot.on_message(filters.command("normal_mode", prefixes=["/", "."]))
     async def hehe(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
-            return
+            return 
         await message.reply_text("I will now respond to any sent file", quote=True)
         mode_for_custom.insert(0, "off")
         rename_task.insert(0, "off")
 
+    # start
     @TGBot.on_message(filters.command("start", prefixes=["/", "."]))
     async def start_cmd_handler(bot, message):
         await message.reply_text(
@@ -138,12 +154,13 @@ if __name__ == "__main__":
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("📕𝗖𝗵𝗮𝗻𝗻𝗲𝗹", url="https://t.me/AnimeZenith_ongoing")
+                        InlineKeyboardButton("📕𝗖𝗵𝗮𝗻𝗻𝗲𝗹", url="https://t.me/Animes_Encoded")
                     ],
                 ],
             )
         )
 
+    # ping
     @TGBot.on_message(filters.incoming & filters.command(["ping"]))
     async def up(app, message):
         stt = dt.now()
@@ -153,12 +170,14 @@ if __name__ == "__main__":
         p = f"🌋Pɪɴɢ = {ms}ms"
         await message.reply_text(v + "\n" + p)
 
+    # restart 
     @TGBot.on_message(filters.command("restart"))
     async def re(bot, message):
         if message.from_user.id in Config.AUTH_USERS:
             await message.reply_text("•Restarting")
             quit()
 
+    # to change ffmpeg variables 
     @TGBot.on_message(filters.command("crf"))
     async def re(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
@@ -191,10 +210,10 @@ if __name__ == "__main__":
         else:
             OUT = f"<b>CODEC</b> ➺ <code>{cr}</code>\n\nThis video codec has been successfully added to the <b>FFMPEG</b> code. Videos processed from now on will be using the said ffmpeg video codec."
             codec.insert(0, f'{cr}')
-            crf.insert(0, "28")
+            crf.insert(0, "29")
             qualityy.insert(0, "846x480")
-            audio_.insert(0, "8")
-            preset.insert(0, "veryfast")
+            bits.insert(0, "8")
+            preset.insert(0, "medium")
 
         await message.reply_text(OUT, quote=True)
 
@@ -224,6 +243,7 @@ if __name__ == "__main__":
         preset.insert(0, f"{cr}")
         await message.reply_text(OUT, quote=True)
 
+    # audio_mode ( for libopus and libfdk_aac support )
     @TGBot.on_message(filters.command("audio_codec"))
     async def re_codec_(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
@@ -233,6 +253,7 @@ if __name__ == "__main__":
         audio_codec.insert(0, f"{cr}")
         await message.reply_text(OUT, quote=True)
 
+    # watermark size
     @TGBot.on_message(filters.command("size"))
     async def re_codec_(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
@@ -242,6 +263,7 @@ if __name__ == "__main__":
         watermark_size.insert(0, f"{cr}")
         await message.reply_text(OUT, quote=True)
 
+    # watermak text
     @TGBot.on_message(filters.command("text"))
     async def re_codec_(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
@@ -251,6 +273,7 @@ if __name__ == "__main__":
         w_t.insert(0, f"{cr}")
         await message.reply_text(OUT, quote=True)
 
+    # bits
     @TGBot.on_message(filters.command("bits"))
     async def re_codec_(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
@@ -260,6 +283,7 @@ if __name__ == "__main__":
         bits.insert(0, f"{cr}")
         await message.reply_text(OUT, quote=True)
 
+    # auth
     @TGBot.on_message(filters.command("auth"))
     async def re(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
@@ -269,6 +293,7 @@ if __name__ == "__main__":
         Config.AUTH_USERS.append(int(cr))
         await message.reply_text(OUT, quote=True)
 
+    # channel
     @TGBot.on_message(filters.command("channel"))
     async def re(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
@@ -278,14 +303,16 @@ if __name__ == "__main__":
         CHANNEL_NAME.insert(0, f"{cr}")
         await message.reply_text(OUT, quote=True)
 
+    # settings
     @TGBot.on_message(filters.incoming & filters.command(["settings"]))
     async def settings(app, message):
         if message.from_user.id in Config.AUTH_USERS:
             await message.reply_text(
-                f"🏷 **Video** \n┏━━━━━━━━━━━━━━━━━\n┣ Codec  ➜ ```{codec[0]}```\n┣ **Crf**  ➜ ```{crf[0]}``` \n┣ **Resolution**  ➜ ```{qualityy[0]}```\n┗━━━━━━━━━━━━━━━━━\n\n🏷  **Audio** \n┏━━━━━━━━━━━━━━━━━\n┣ **Codec**  ➜ ```{audio_codec[0]}```\n┣  **Bitrates** ➜ ```{audio_[0]}```\n┗━━━━━━━━━━━━━━━━━\n\n🏷 **Watermark**\n┏━━━━━━━━━━━━━━━━━\n┣ **Position** ➜ ```None```\n┣ **Size**  ➜ ```{watermark_size[0]}```\n┗━━━━━━━━━━━━━━━━━\n\n🏷 **Speed**\n┏━━━━━━━━━━━━━━━━━\n┣ **Preset** ➜ ```{preset[0]}```\n┗━━━━━━━━━━━━━━━━━",
+                f"🏷 Video \n┏━━━━━━━━━━━━━━━━━\n┣ Codec  ➜ <code>{codec[0]}</code>\n┣ Crf  ➜ <code>{crf[0]}</code>\n┣ Resolution  ➜ <code>{qualityy[0]}</code>\n┣ Bits ➜ <code>{bits[0]}</code>\n┗━━━━━━━━━━━━━━━━━\n\n🏷  Audio \n┏━━━━━━━━━━━━━━━━━\n┣ Codec  ➜ <code>{audio_codec[0]}</code>\n┣  Bitrates ➜ <code>40k</code>\n┗━━━━━━━━━━━━━━━━━\n\n🏷 Watermark\n┏━━━━━━━━━━━━━━━━━\n┣ Text ➜ <code>{w_t[0]}</code>\n┣ Size  ➜ <code>{watermark_size[0]}</code>\n┗━━━━━━━━━━━━━━━━━\n\n🏷 Speed\n┏━━━━━━━━━━━━━━━━━\n┣ Preset ➜ <code>{preset[0]}</code>\n┗━━━━━━━━━━━━━━━━━",
                 quote=True
-              )
- 
+            )
+
+    # name
     @TGBot.on_message(filters.incoming & filters.command(["name"]))
     async def settings(app, message):
         if message.from_user.id not in Config.AUTH_USERS:
@@ -295,6 +322,7 @@ if __name__ == "__main__":
         await message.reply_text(OUT, quote=True)
         name.insert(0, f"{cr}")
 
+    # databases
     @TGBot.on_message(filters.incoming & filters.command("clear", prefixes=["/", "."]))
     async def lost_files(bot, message):
         if message.chat.id not in Config.AUTH_USERS:
@@ -308,3 +336,4 @@ if __name__ == "__main__":
     logger.info("Bot has started successfully 💀✊🏻")
     TGBot.add_handler(cb_bro)
     asyncio.get_event_loop().run_until_complete(start_bot())
+    
