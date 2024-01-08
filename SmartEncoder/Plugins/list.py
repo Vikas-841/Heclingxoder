@@ -3,45 +3,27 @@
 Python3 --> list
 """
 
-from SmartEncoder.Database.db import myDB
-
-class video:
-  crf = []
-  crf.append("33.5")
-  codec = []
-  codec.append("libx264")
-  qualityy = []
-  qualityy.append("846x480")
-  
-  
-#myDB.set('crf', "29.5")
-#video.codec.append("libx265")
-#video.quality.append("852x480")
-
-class audio:
-  audio_codec = []
-  audio_codec.append("libopus")
-  audio_ = []
-  audio_.append("32k")
- 
-class speed:
-  preset = []
-  preset.append("veryfast")
-
-class watermark:
-  size_one = []
-  size_two = []
-
-watermark.size_one.append('25')
-watermark.size_two.append('30')
-vanish = []
-vanish.insert(0, "true")
-#class queue:
-#data = []
-#queue = []
+mode_for_custom = []
+data = []
+qualityy = []
+qualityy.append("854x480")
+crf = []
+crf.append("28")
+codec = []
+codec.append("libx264")
+preset = []
+preset.append("veryfast")
+audio_codec = []
+audio_codec.append("libopus")
+watermark_size = []
+watermark_size.append("12")
+w_t = []
+bits = []
+bits.append("32k")
+audio_ = []
+audio_.append("32k")
 name = []
 name.append("480p")
-
 rename_queue = []
 rename_task = []
 rename_task.insert(0, "off")
