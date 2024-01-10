@@ -49,10 +49,10 @@ async def start_bot():
     # await resume_task()
     await idle()
 
-# if __name__ == "main":
-#     loop.run_untill_complete(start_bot())
+#if __name__ == "main":
+    loop.run_until_complete(start_bot())
 # rename_task.insert(0, "on")
-if __name__ == "main":
+if __name__ == "__main__":
     @TGBot.on_message(filters.incoming & (filters.video | filters.document))
     async def wah_1_man(bot, message: Message):
         if mode_for_custom[0] == "off":
@@ -307,8 +307,37 @@ if __name__ == "main":
     @TGBot.on_message(filters.incoming & filters.command(["settings"]))
     async def settings(app, message):
         if message.from_user.id in Config.AUTH_USERS:
+            video_info = (
+                f"🏷 Video \n┏━━━━━━━━━━━━━━━━━\n"
+                f"┣ Codec  ➜ <code>{codec[0] if codec else 'Not set'}</code>\n"
+                f"┣ Crf  ➜ <code>{crf[0] if crf else 'Not set'}</code>\n"
+                f"┣ Resolution  ➜ <code>{qualityy[0] if qualityy else 'Not set'}</code>\n"
+                f"┣ Bits ➜ <code>{bits[0] if bits else 'Not set'}</code>\n"
+                f"┗━━━━━━━━━━━━━━━━━"
+            )
+
+            audio_info = (
+                f"🏷  Audio \n┏━━━━━━━━━━━━━━━━━\n"
+                f"┣ Codec  ➜ <code>{audio_codec[0] if audio_codec else 'Not set'}</code>\n"
+                f"┣  Bitrates ➜ <code>40k</code>\n"
+                f"┗━━━━━━━━━━━━━━━━━"
+            )
+
+            watermark_info = (
+                f"🏷 Watermark\n┏━━━━━━━━━━━━━━━━━\n"
+                f"┣ Text ➜ <code>{w_t[0] if w_t else 'Not set'}</code>\n"
+                f"┣ Size  ➜ <code>{watermark_size[0] if watermark_size else 'Not set'}</code>\n"
+                f"┗━━━━━━━━━━━━━━━━━"
+            )
+
+            speed_info = (
+                f"🏷 Speed\n┏━━━━━━━━━━━━━━━━━\n"
+                f"┣ Preset ➜ <code>{preset[0] if preset else 'Not set'}</code>\n"
+                f"┗━━━━━━━━━━━━━━━━━"
+            )
+
             await message.reply_text(
-                f"🏷 Video \n┏━━━━━━━━━━━━━━━━━\n┣ Codec  ➜ <code>{codec[0]}</code>\n┣ Crf  ➜ <code>{crf[0]}</code>\n┣ Resolution  ➜ <code>{qualityy[0]}</code>\n┣ Bits ➜ <code>{bits[0]}</code>\n┗━━━━━━━━━━━━━━━━━\n\n🏷  Audio \n┏━━━━━━━━━━━━━━━━━\n┣ Codec  ➜ <code>{audio_codec[0]}</code>\n┣  Bitrates ➜ <code>40k</code>\n┗━━━━━━━━━━━━━━━━━\n\n🏷 Watermark\n┏━━━━━━━━━━━━━━━━━\n┣ Text ➜ <code>{w_t[0]}</code>\n┣ Size  ➜ <code>{watermark_size[0]}</code>\n┗━━━━━━━━━━━━━━━━━\n\n🏷 Speed\n┏━━━━━━━━━━━━━━━━━\n┣ Preset ➜ <code>{preset[0]}</code>\n┗━━━━━━━━━━━━━━━━━",
+                video_info + "\n\n" + audio_info + "\n\n" + watermark_info + "\n\n" + speed_info,
                 quote=True
             )
 
