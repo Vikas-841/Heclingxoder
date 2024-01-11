@@ -163,7 +163,7 @@ if __name__ == "__main__":
 
     # ping
     @TGBot.on_message(filters.incoming & filters.command(["ping"]))
-    async def up(app, message):
+    async def up(bot, message):
         stt = dt.now()
         ed = dt.now()
         v = TimeFormatter(int((ed - uptime).seconds) * 1000)
