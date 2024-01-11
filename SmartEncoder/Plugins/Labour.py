@@ -63,7 +63,7 @@ async def labour_encode(bot, update):
       document=o,
       force_document=True,
       #caption="©️ @Animes_Encoded",
-      reply_to_message_id=update.message_id,
+      reply_to_message_id=message.message_id,
       progress=progress_for_pyrogram,
       progress_args=(bot, "UPLOADING", sent_message, c_time)
     )
