@@ -59,7 +59,7 @@ if __name__ == "__main__":
             if message.chat.id not in Config.AUTH_USERS:
                 return
             if rename_task[0] == "off":
-                query = await message.reply_text("Aᴅᴅᴇᴅ ᴛʜɪs ғɪʟᴇ ɪɴ ǫᴜᴇᴜᴇ.\nCᴏᴍᴘʀᴇss ᴡɪʟʟ sᴛᴀʀᴛ sᴏᴏɴ.", quote=True)
+                query = await message.reply_text("Aᴅᴅᴇᴅ ᴛʜɪs ғɪʟᴇ ɪɴ ǫᴜᴇᴜᴇ.\nCᴏᴍᴘʀᴇss ᴡɪʟʟ sᴛᴀʀᴛ sᴏᴏɴ.", quote=True, reply_markup=None)
                 a = message
                 data.append(a)
                 if len(data) == 1:
@@ -68,11 +68,12 @@ if __name__ == "__main__":
             else:
                 if message.from_user.id not in Config.AUTH_USERS:
                     return 
-                query = await message.reply_text("Added this file to rename in queue.", quote=True)
+                query = await message.reply_text("Added this file to rename in queue.", quote=True, reply_markup=None)
                 rename_queue.append(message)
                 if len(rename_queue) == 1:
                     await query.delete()
                     await add_rename(bot, message)
+
 
     @TGBot.on_message(filters.incoming & filters.command("rename_mode", prefixes=["/", "."]))
     async def help_eval_message(bot, message):
@@ -231,7 +232,7 @@ if __name__ == "__main__":
             return
         cr = message.text.split(" ", maxsplit=1)[1]
         OUT = f"<b>I will use {cr} quality in renaming files<b>"
-        quality_.insert(0, f"{cr}")
+        qualityy.insert(0, f"{cr}")
         await message.reply_text(OUT, quote=True)
 
     @TGBot.on_message(filters.command("preset"))
@@ -265,14 +266,17 @@ if __name__ == "__main__":
 
     # watermak text
     @TGBot.on_message(filters.command("text"))
-    async def re_codec_(bot, message):
+    async def re_watermark_text(bot, message):
         if message.from_user.id not in Config.AUTH_USERS:
             return
-        cr = message.text.split(" ", maxsplit=1)[1]
-        OUT = f"<b>I will use {cr} watermark text in encoding files.<b>"
-        w_t.insert(0, f"{cr}")
-        await message.reply_text(OUT, quote=True)
-
+        split_message = message.text.split(" ", maxsplit=1)
+        if len(split_message) >= 2:
+            cr = split_message[1]
+            w_t.insert(0, f"{cr}")
+            OUT = f"<b>I will use {cr} watermark text in encoding files.</b>"
+            await message.reply_text(OUT, quote=True)
+        else:
+            await message.reply_text("Please provide the required parameters.", quote=True)
     # bits
     @TGBot.on_message(filters.command("bits"))
     async def re_codec_(bot, message):
