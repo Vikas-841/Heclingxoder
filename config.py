@@ -12,7 +12,7 @@ class Config(object):
   AUTH_USERS = os.environ.get("AUTH_USERS")
   GOD = os.environ.get("GOD")
   REDIS_HOST = os.environ.get("REDIS_HOST")
- # REDIS_PORT = int(os.environ.get("REDIS_PORT", 12345))
+  REDIS_PORT = int(os.environ.get("REDIS_PORT", 12345))
   REDIS_PASS = os.environ.get("REDIS_PASS")
   DOWNLOAD_LOCATION = "downloads"
 
@@ -23,6 +23,3 @@ Config.BOT_TOKEN = "6979551576:AAFypnxDSJbalaX3kXDr9Nf8WKlLfjgor2w"
 Config.REDIS_HOST = "redis-16727.c16.us-east-1-2.ec2.cloud.redislabs.com"
 Config.REDIS_PASS = "7rcBuuSMeVtbxxeVD3zUEpr6ZS2YmLcK"
 REDIS_PORT = "16727"
-#.
-
-#.
