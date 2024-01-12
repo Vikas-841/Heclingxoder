@@ -1,4 +1,5 @@
 Pyrogram
+aiohttp>=3.9.0
 ethon
 tgcrypto 
 redis
